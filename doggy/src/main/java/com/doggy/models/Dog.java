@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Dog {
-    private AtomicInteger idGenerator = new AtomicInteger(1);
+    private static AtomicInteger idGenerator = new AtomicInteger(1);
     private int id;
     private String name;
     private int age;
@@ -52,5 +52,7 @@ public class Dog {
     public List<Allergy> getAllergies() {
         return allergies;
     }
+
+
 }
 

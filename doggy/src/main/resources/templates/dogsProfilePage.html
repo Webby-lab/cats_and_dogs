@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text=" 'Vendégünk profilja - ' + ${dog.name}"></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body th:object="${dog}">
+    <h1 th:text=" *{name} + ' Profilja'"></h1>
+    <section>
+        <h2 th:text=" *{name} + 'adatai '"></h2>
+        <ul>
+            <li th:text=" 'Id:' + *{id}"></li>
+            <li th:text=" 'name:' + *{name}"></li>
+            <li th:text=" 'owner:' + *{owner}"></li>
+            <li th:text=" 'age:' + *{age}"></li>
+            <li th:text=" 'gender:' + *{gender}"></li>
+        </ul>
+    </section>
+    <section>
+        <h2 th:text="*{name} + ' allergiái'"></h2>
+        <ol>
+            <li th:each="allergy : *{allergies}" th:text="${allergy}"></li>
+        </ol>
+    </section>
+</body>
+</html>

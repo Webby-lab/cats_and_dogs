@@ -23,7 +23,9 @@
         <tbody>
         <tr th:each="dog:${dogs}">
             <td th:text="${dog.getId()}"></td>
-            <td th:text="${dog.getName()}"></td>
+            <td >
+            <a th:text="${dog.getName()}" th:href="'dogs/' + ${dog.getId()}"/>
+            </td>
             <td th:text="${dog.getOwner()}"></td>
             <td th:text="${dog.getAge()}"></td>
             <td th:text="${dog.getGender()}"></td>

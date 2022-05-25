@@ -6,6 +6,7 @@ import com.doggy.models.Owner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,12 @@ public class DogController {
         model.addAttribute("owner", geza);
 
         return "dogs";
+    }
+    @GetMapping("/dogs/{id}")
+    public String renderProfilePage(Model model, @PathVariable(value = "id") Integer id) {
+        Dog dog = dogs.stream().filter((Dog d)-> d.getId() == id).findFirst().get();
+        model.addAttribute("dog", dog);
+        return "dogsProfilePage";
     }
 }
 
