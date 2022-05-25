@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title th:text=" 'Vendégünk profilja - ' + ${dog.name}"></title>
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;700&display=swap" rel="stylesheet">
 </head>
 <body th:object="${dog}">
     <h1 th:text=" *{name} + ' Profilja'"></h1>
     <section>
-        <h2 th:text=" *{name} + 'adatai '"></h2>
+        <h2 th:text=" *{name} + ' adatai '"></h2>
         <ul>
             <li th:text=" 'Id:' + *{id}"></li>
             <li th:text=" 'name:' + *{name}"></li>

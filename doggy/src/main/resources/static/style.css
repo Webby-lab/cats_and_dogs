@@ -1,3 +1,7 @@
+body {
+font-family: 'Oswald', sans-serif;
+}
+
 main {
     text-align: center;
 }
@@ -14,6 +18,22 @@ td {
     border: 1px solid black;
 }
 
+tr:nth-child(eve) {
+    background-color: cadetblue;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: darkcyan;
+    color: aliceblue;
+}
+
+thead {
+    background-color: white;
+}
+
 h1, h2 {
     color: blue;
+}
+h2 a {
+    display: block;
 }
