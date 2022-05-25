@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dogs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="dogs">
+    <h1> Our dogs</h1>
+    <h1 th:text="${owner}">tulaj</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Tulajdonos</th>
+            <th>Kora</th>
+            <th>Neme</th>
+            <th>Allergiái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dog:${dogs}">
+            <td th:text="${dog.getId()}"></td>
+            <td th:text="${dog.getName()}"></td>
+            <td th:text="${dog.getOwner()}"></td>
+            <td th:text="${dog.getAge()}"></td>
+            <td th:text="${dog.getGender()}"></td>
+            <td th:text="${dog.getAllergies()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
