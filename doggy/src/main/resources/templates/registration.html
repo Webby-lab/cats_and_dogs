@@ -2,11 +2,51 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Regisztráció</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Regisztráció</h1>
+<main id="registration">
+    <fieldset>
+        <h1>Regisztráció</h1>
+        <form action="/registration" method="post">
+            <div class="form-field">
+                <label for="name">Név:</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="form-field">
+                <label for="age">Kor:</label>
+                <input type="number" name="age" id="age" min="0" max="50" required>
+            </div>
+            <div class="form-field">
+                <label>Nem</label>
+                <label for="femail">Lány:</label>
+                <input type="radio" name="gender" id="femail">
+                <label for="mail">Fiú:</label>
+                <input type="radio" name="gender" id="mail">
+            </div>
+            <div>
+                <span>Allergiái</span>
+                <label th:each="allergy : ${allergies}">
+                    <span th:text="${allergy}"></span>
+                    <input type="checkbox" name="allergies" th:value="${allergy}">
+                </label>
+
+                </select>
+            </div>
+            <div>
+                <label for="social">Mennyire szocializált?</label>
+                <input type="range" name="social" id="social">
+            </div>
+            <div class="form-field">
+                <input type="submit" value="Regisztrálok" id="submit">
+            </div>
+        </form>
+    </fieldset>
+
+</main>
+
+
 </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Időpont</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Időpontfoglalás kezelésre</h1>
+<form action="#" th:action="appointment" method="post">
+    <label>Kis kedvenceink
+        <select>
+            <option th:each=" dog : ${dogs}" th:text= "|${dog.id} - ${dog.name}|"></option>
+        </select>
+    </label>
+    <label>
+        <span>Időpont:</span>
+        <input type="datetime-local">
+    </label>
+    <label>
+        <span>Kezelés: </span>
+        <select>
+            <option th:each=" treatment : ${treatments}" th:text="${treatment.toString().toLowerCase()}"></option>
+        </select>
+    </label>
+    <fieldset>
+        <legend>Gazdi ottmarad?</legend>
+        <label>
+            <span>igen</span>
+            <input type="radio" name="isStay" value="true">
+        </label>
+        <label>
+            <span>nem</span>
+            <input type="radio" name="isStay" value="false">
+        </label>
+    </fieldset>
+
+</form>
+</body>
+</html>

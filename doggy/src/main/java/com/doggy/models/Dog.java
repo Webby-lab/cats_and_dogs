@@ -1,5 +1,7 @@
 package com.doggy.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -10,11 +12,27 @@ public class Dog {
     private int age;
     private String gender;
     private Owner owner;
-
-    private List<Allergy> allergies;
+    private List<Allergy> allergies =new ArrayList<>();
 
     public Dog() {
+        this.id = idGenerator.getAndIncrement();
     }
+
+    public Dog(String name, int age, String gender) {
+        this.id = idGenerator.getAndIncrement();
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+
+    }
+    public Dog(String name, int age, String gender, List<Allergy> allergies) {
+        this.id = idGenerator.getAndIncrement();
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.allergies = allergies;
+    }
+
 
     public Dog(String name, int age, String gender, List<Allergy> allergies, Owner owner) {
         this.id = idGenerator.getAndIncrement();
