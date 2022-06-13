@@ -1,8 +1,6 @@
 package com.doggy.repositories;
 
-import com.doggy.models.Allergy;
-import com.doggy.models.Dog;
-import com.doggy.models.Owner;
+import com.doggy.models.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +33,9 @@ public class DogRepository {
         return dogs.stream()
                 .filter(d -> d.getName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+    public static void register(Dog dog) {
+        dogs.add(dog);
     }
 
 }

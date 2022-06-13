@@ -1,10 +1,8 @@
 package com.doggy.controllers;
 
-import com.doggy.models.Allergy;
-import com.doggy.models.Dog;
-import com.doggy.models.Owner;
-import com.doggy.models.Treatment;
+import com.doggy.models.*;
 import com.doggy.repositories.DogRepository;
+import com.doggy.services.AppointmentService;
 import com.doggy.services.DogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,14 +61,30 @@ public class DogController {
 
     @PostMapping("/registration")
     public String registerAnimal(@ModelAttribute Dog dog) {
-        DogRepository.getAll().add(dog);
+        DogRepository.register(dog);
         return "redirect:/dogs";
     }
 
-    @GetMapping("appointment")
+    @GetMapping("/appointment")
     public String renderNewAppointmentPage(Model model) {
         model.addAttribute("dogs", DogService.getAll());
         model.addAttribute("treatments", Treatment.values());
+        model.addAttribute("appointments", AppointmentService.getAll());
+        return "newAppointment";
+    }
+
+    @PostMapping("/appointment")
+    public String saveNewAppointment(@ModelAttribute Appointment appointment) {
+        AppointmentService.saveOrModify(appointment);
+    return "redirect:/appointment";
+    }
+
+    @GetMapping("/appointment/{id}")
+    public String renderModifyAppointmentPage(@PathVariable Long id, Model model) {
+        model.addAttribute("appointment", AppointmentService.getById(id) );
+        model.addAttribute("dogs", DogService.getAll());
+        model.addAttribute("treatments", Treatment.values());
+        model.addAttribute("appointments", AppointmentService.getAll());
         return "newAppointment";
     }
 }

@@ -1,7 +1,9 @@
 package com.doggy.services;
 
 import com.doggy.models.Allergy;
+import com.doggy.models.Appointment;
 import com.doggy.models.Dog;
+import com.doggy.repositories.AppointmentsRepository;
 import com.doggy.repositories.DogRepository;
 
 import java.util.List;
@@ -35,6 +37,11 @@ public static List<Dog> filterByAllargies(List<Dog> dogs, Allergy allergy) {
 }
 public static List<Dog> getAll() {
         return DogRepository.getAll();
+}
+public static Appointment newAppointment() {
+        List<Appointment> appointments = AppointmentsRepository.getAll();
+        Appointment newAppointment = appointments.get(appointments.size()-1);
+        return newAppointment != null ? newAppointment : new Appointment();
 }
 
 }

@@ -3,39 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Időpont</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Időpontfoglalás kezelésre</h1>
-<form action="#" th:action="appointment" method="post">
-    <label>Kis kedvenceink
-        <select>
-            <option th:each=" dog : ${dogs}" th:text= "|${dog.id} - ${dog.name}|"></option>
-        </select>
-    </label>
-    <label>
-        <span>Időpont:</span>
-        <input type="datetime-local">
-    </label>
-    <label>
-        <span>Kezelés: </span>
-        <select>
-            <option th:each=" treatment : ${treatments}" th:text="${treatment.toString().toLowerCase()}"></option>
-        </select>
-    </label>
-    <fieldset>
-        <legend>Gazdi ottmarad?</legend>
-        <label>
-            <span>igen</span>
-            <input type="radio" name="isStay" value="true">
-        </label>
-        <label>
-            <span>nem</span>
-            <input type="radio" name="isStay" value="false">
-        </label>
-    </fieldset>
+<div class="box">
+    <h1 th:text="${appointment == null ? 'Időpontfoglalás kezelésre' : 'Időpont modosítása'}" ></h1>
+    <form action="/appointment" method="post">
+        <input th:if="${appointment != null}" type="hidden" name="id" th:value="${appointment.id}">
+        <label>Kis kedvenceink
+            <select  name="dogId" required>
+                <option th:each=" dog : ${dogs}"
+                        th:text= "|${dog.id} - ${dog.name}|"
+                        th:value="${dog.id}"
+                th:selected="${dog.id == appointment?.dogId}">
 
-</form>
+                </option>
+            </select>
+        </label>
+        <label>
+            <span>Időpont:</span>
+            <input type="datetime-local" name="time" th:value="${appointment?.time}" required>
+        </label>
+        <label>
+            <span>Kezelés: </span>
+            <select name="treatment" required>
+                <option th:each=" treatment : ${treatments}"
+                        th:text="${treatment.toString().toLowerCase()}"
+                        th:value="${treatment}"
+                        th:selected="${appointment?.treatment == treatment}"></option>
+            </select>
+        </label>
+        <fieldset>
+            <legend>Gazdi ottmarad?</legend>
+            <label>
+                <span>igen</span>
+                <input type="radio"
+                       name="isStay"
+                       th:value="true"
+                       th:checked="${appointment?.isStay}">
+            </label>
+            <label>
+                <span>nem</span>
+                <input type="radio"
+                       name="isStay"
+                       th:value="false"
+                       th:checked="${appointment?.isStay == false}" required>
+            </label>
+        </fieldset>
+        <a th:if="${appointment != null}" class="btn" href="/appointment">Mégse</a>
+        <input type="submit" th:value="${appointment == null ? 'Foglalás' : 'Módosítás'} " class="btn">
+    </form>
+</div>
+
+<table>
+    <thead>
+    <th>id</th>
+    <th>dog id</th>
+    <th>time</th>
+    <th>treatment</th>
+    <th>isStay</th>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${appointments}" th:class="${appointment?.id == app.id ? 'select' :''}">
+        <td>
+            <a th:text="${app.id}" th:href="|/appointment/${app.id}|"></a>
+        </td>
+        <td th:text="${app.dogId}"></td>
+        <td th:text="${app.time}"></td>
+        <td th:text="${app.treatment}"></td>
+        <td th:text="${app.isStay}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
